@@ -17,19 +17,15 @@ class TkinterView:
 
     def show_tascs(self, data):
         parent = self.root
-        el = Listbox(parent, name = "lb")
-        el.bind('<<ListboxSelect>>', self.taskSelect)
+
 
         for item in data:
             task = self.asTask(item)
-            el.insert(END, task.title)
-        el.pack(side = LEFT, fill = BOTH)
-        el.bind('<<ListboxSelect>>', self.showDescription("dfdf"))
-        self.showDescription(self.asTask(data[0]).description)
+            el = Button(parent, text = task.title, textvar = task.title)
+            descText = task.title
 
-
-    def taskSelect(self, event):
-        self.showDescription("asd")
+            el.bind("<Button-1>", lambda e, text=descText: self.showDescription(descText) )
+            el.pack(side = TOP, fill = BOTH)
 
 
     # преобразовывает в тип данных TASK
@@ -43,8 +39,10 @@ class TkinterView:
         self.description = el
 
     def showDescription(self, text):
+
         el = self.description
-        el.insert(1.0, text)
+        el.delete(1.0, END)
+        el.insert(INSERT, text)
 
 
 

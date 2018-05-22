@@ -20,13 +20,22 @@ class TkinterView:
 
 
         for item in data:
-            task = self.asTask(item)
-            el = Button(parent, text = task.title, textvar = task.title)
-            descText = task.title
+            prop = StringVar()
 
-            el.bind("<Button-1>", lambda e, text=descText: self.showDescription(descText) )
+            task = self.asTask(item)
+            prop.set(str(task.title))
+
+            el = Button(parent, text = task.title)
+
+            data = {"title":task.title, "description":task.description}
+
+            el.bind("<Button-1>", lambda event, arg = data: self.showDescription(arg) )
             el.pack(side = TOP, fill = BOTH)
 
+    def showDescription(self, arg):
+        el = self.description
+        el.delete(1.0, END)
+        el.insert(INSERT, arg["description"])
 
     # преобразовывает в тип данных TASK
     def asTask(self, task: Task) ->Task:
@@ -38,11 +47,7 @@ class TkinterView:
         el.pack(side=RIGHT, expand=YES, fill=BOTH)
         self.description = el
 
-    def showDescription(self, text):
 
-        el = self.description
-        el.delete(1.0, END)
-        el.insert(INSERT, text)
 
 
 

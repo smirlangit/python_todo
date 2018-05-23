@@ -4,13 +4,21 @@ from os import path
 from _todo.models.ObjTask import ObjTask as Task
 
 
-# собирает все задачи из файла с задачами и оформляет в нужный массив
-def getData():
-    TODOFILE = "TODO.txt"
-    file_exist = path.exists(TODOFILE)
-    if (file_exist):
+# собирает все задачи из файла с задачами и оформляет в массив
+class ReadTXT:
+
+    TODOfile = "TODO.txt"
+    conf = None
+
+    def __init__(self):
+        self.conf = ConfigParser()
+
+    def getData(self):
+        TODOFILE = self.TODOfile
+        file_exist = path.exists(TODOFILE)
+        if (file_exist):
             # загрузка данных из списка задач
-            conf = ConfigParser()
+            conf = self.conf
             conf.read(TODOFILE, encoding="utf-8")
             sections = conf.sections()
 
@@ -18,7 +26,6 @@ def getData():
             data = []
             for section in sections:
                 task = Task()
-
                 task.title = conf.get(section, "title")
                 task.description = conf.get(section, "desc")
                 task.status = conf.get(section, "status")
@@ -28,3 +35,12 @@ def getData():
                 data.append(task)
 
             return data
+
+    def saveData(self, dataArray):
+        TODOFILE = self.TODOfile
+        file_exist = path.exists(TODOFILE)
+
+        if (file_exist):
+            conf = self.conf
+            conf.write(TODOFILE, "w")
+            return

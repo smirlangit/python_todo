@@ -40,7 +40,10 @@ class ReadTXT:
         TODOFILE = self.TODOfile
         file_exist = path.exists(TODOFILE)
 
+
         if (file_exist):
             conf = self.conf
+            data = []
+            data["zzz"]={"one":"1", "two":"2"}
             conf.write(TODOFILE, "w")
             return

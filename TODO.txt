@@ -8,14 +8,14 @@ status = active
 
 [task2]
 title= задача 2
-desc = добавить в файл оут новые строки
+desc = задава номер два
 date_start=19 мая 2018, 15:30
 date_end=19 мая 2018
 status = complete
 
 [task3]
-title= задача 3
-desc = добавить в файл оут новые строки
+title= задача 3 длинный заголовок
+desc = sdfsdfsdf sf sdf sd
 date_start=19 мая 2018, 15:30
 date_end=19 мая 2018
 status = waiting
